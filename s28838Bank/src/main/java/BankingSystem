@@ -1,0 +1,51 @@
+public class BankingSystem {
+
+    private List<Client> clients = new ArrayList<>();
+
+    public void createclient(Client client) {
+        clients.add(client);
+        client.getTransactionHistory().add("Client created.");
+    }
+
+    public Client getClient(long clientNumber) {
+        for (Client client : clients) {
+            if (client.getClientNumber() == clientNumber) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    public void updateClient(client client, String newHolderName) {
+        client.setHolderName(newHolderName);
+        client.getTransactionHistory().add("Client holder name updated to " + newHolderName + ".");
+    }
+
+    public void deleteClient(long clientNumber) {
+        client client = getclient(clientNumber);
+        if (client != null) {
+            clients.remove(client);
+        }
+    }
+
+    public void deposit(Client client, double amount) {
+        client.setBalance(client.getBalance() + amount);
+        client.getTransactionHistory().add("Deposited $" + amount + ". New Balance: $" + client.getBalance());
+    }
+
+    public void withdraw(Client client, double amount) {
+        if (client.getBalance() >= amount) {
+            client.setBalance(client.getBalance() - amount);
+            client.getTransactionHistory().add("Withdrew $" + amount + ". New Balance: $" + client.getBalance());
+        } else {
+            System.out.println("Insufficient funds.");
+        }
+    }
+
+    public void printTransactionHistory(Client client) {
+        System.out.println("Transaction History for Client " + client.getClientNumber() + ":");
+        for (String transaction : client.getTransactionHistory()) {
+            System.out.println(transaction);
+        }
+    }
+}

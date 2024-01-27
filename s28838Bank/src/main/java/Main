@@ -1,0 +1,15 @@
+public class Main {
+    public static void main(String[] args) {
+        BankingSystem bank = new BankingSystem();
+
+        Account jan = new Client(12345, "Jan Kowalski", 1000.00);
+        bank.createClient(jan);
+
+        bank.deposit(jan, 500.00);
+        bank.withdraw(jan, 300.00);
+
+        bank.updateClient(jan, "Janusz Kowalski");
+
+        bank.printTransactionHistory(jan);
+    }
+}
